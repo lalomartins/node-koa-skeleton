@@ -1,30 +1,31 @@
 import Koa from 'koa';
-import route from 'koa-route';
+import Router from '@koa/router';
+import mongo from 'koa-mongo';
 
-// import local stuff and set it up
-
+// import {router as foo} from './foo.js';
 export const app = new Koa();
+app.use(mongo());
+const router = new Router();
 
-app.use(
-  route.get('/health', async (ctx) => {
-    ctx.body = 'Healthy';
-  }),
-);
+router.get('/health', async (ctx) => {
+  ctx.body = 'Healthy';
+});
 
 // logger
 app.use(async (ctx, next) => {
   try {
     await next();
-  } catch (e) {
+  } catch(e) {
     console.error(`${ctx.method} ${ctx.url} - ${ctx.response.status}`);
     throw e;
   }
   console.log(`${ctx.method} ${ctx.url} - ${ctx.response.status}`);
 });
 
-// Actual routes here (ideally import them)
-app.use(
-  route.get('/hello', async (ctx) => {
-    ctx.body = 'Hello, World!';
-  }),
-);
+router.get('/hello', async (ctx) => {
+  ctx.body = 'Hello, World!';
+});
+// router.use('/v1', foo.routes(), foo.allowedMethods());
+
+app.use(router.routes());
+app.use(router.allowedMethods());
