@@ -1,0 +1,36 @@
+{
+  "name": "node-skeleton",
+  "version": "0.0.1",
+  "description": "An empty project in Node with basic configuration My Way™.",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "cover": "jest --coverage",
+    "lint": "eslint worker.js src",
+    "start": "node serve.js"
+  },
+  "author": "Lalo Martins <lalo.martins@gmail.com>",
+  "license": "UNLICENSED",
+  "jest": {
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/node_modules/",
+      "<rootDir>/src/date.js"
+    ]
+  },
+  "engines": {
+    "node": "^17.0.0"
+  },
+  "dependencies": {
+    "koa": "^2.11.0",
+    "koa-route": "^3.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-plugin-jest": "^23.8.2",
+    "jest": "^25.3.0",
+    "supertest": "^4.0.2",
+    "supertest-koa-agent": "^0.3.2"
+  }
+}
